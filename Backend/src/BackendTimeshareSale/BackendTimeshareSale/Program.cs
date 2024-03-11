@@ -1,3 +1,5 @@
+using BackendTimeshareSale.Extensions;
+
 namespace BackendTimeshareSale
 {
     public class Program
@@ -12,7 +14,15 @@ namespace BackendTimeshareSale
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddDatabase();
+            builder.Services.AddUnitOfWork();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,7 +35,9 @@ namespace BackendTimeshareSale
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
+            app.UseSession();
+            app.UseRouting();
 
             app.MapControllers();
 
