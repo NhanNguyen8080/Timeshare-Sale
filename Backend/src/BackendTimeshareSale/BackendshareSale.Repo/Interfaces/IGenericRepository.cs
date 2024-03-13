@@ -12,6 +12,7 @@ namespace BackendshareSale.Repo.Interfaces
            int? pageSize = null);
 
         int Count(Expression<Func<T, bool>> filter = null);
+        IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes);
         T GetByID(object id);
 
         void Insert(T entity);

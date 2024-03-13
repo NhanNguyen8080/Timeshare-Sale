@@ -71,6 +71,21 @@ namespace BackendshareSale.Repo.Implements
             return query.ToList();
         }
 
+        public IQueryable<T> GetAll()
+        {
+            IQueryable<T> result = this._dbSet;
+            return result;
+        }
+        public IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> result = this._dbSet;
+            foreach(var expression in includes)
+            {
+                result = result.Include(expression);
+            }
+            return result;
+        }
+
         public T GetByID(object id)
         {
             return _dbSet.Find(id);
