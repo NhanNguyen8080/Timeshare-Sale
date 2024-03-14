@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendTimeshareSale", "BackendTimeshareSale\BackendTimeshareSale.csproj", "{D413FF42-AC04-415F-BD1C-F0ACB25E6C60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendshareSale.Repo", "BackendshareSale.Repo\BackendshareSale.Repo.csproj", "{896C1C69-8474-4266-9CDA-76316125313E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendshareSale.Repo", "BackendshareSale.Repo\BackendshareSale.Repo.csproj", "{896C1C69-8474-4266-9CDA-76316125313E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTimeshareSale.Service", "BackendTimeshareSale.Service\BackendTimeshareSale.Service.csproj", "{D2B89180-9676-4F83-BE4F-D681FEE852CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{896C1C69-8474-4266-9CDA-76316125313E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{896C1C69-8474-4266-9CDA-76316125313E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{896C1C69-8474-4266-9CDA-76316125313E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2B89180-9676-4F83-BE4F-D681FEE852CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B89180-9676-4F83-BE4F-D681FEE852CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B89180-9676-4F83-BE4F-D681FEE852CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B89180-9676-4F83-BE4F-D681FEE852CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
