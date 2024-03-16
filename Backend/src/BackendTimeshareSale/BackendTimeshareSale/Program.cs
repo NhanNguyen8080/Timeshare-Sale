@@ -1,4 +1,6 @@
 using BackendTimeshareSale.Extensions;
+using BackendTimeshareSale.Service.IServices;
+using BackendTimeshareSale.Service.ServiceImp;
 
 namespace BackendTimeshareSale
 {
@@ -17,12 +19,18 @@ namespace BackendTimeshareSale
             builder.Services.AddDatabase();
             builder.Services.AddUnitOfWork();
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IContractService, ContractService>();
+            builder.Services.AddScoped<IPropertyService, PropertyService>();
+
+
+            /* builder.Services.AddSession(options =>
+             {
+                 options.IdleTimeout = TimeSpan.FromMinutes(30);
+                 options.Cookie.HttpOnly = true;
+                 options.Cookie.IsEssential = true;
+             });*/
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,7 +44,7 @@ namespace BackendTimeshareSale
 
             app.UseAuthorization();
             app.UseStaticFiles();
-            app.UseSession();
+            /*app.UseSession();*/
             app.UseRouting();
 
             app.MapControllers();

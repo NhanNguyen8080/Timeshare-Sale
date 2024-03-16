@@ -15,6 +15,7 @@ namespace BackendTimeshareSale.Extensions
 
         public static IServiceCollection AddDatabase(this IServiceCollection services)
         {
+            string str = GetConnectionString();
             services.AddDbContext<TimeSharing2024DBContext>(options => options.UseSqlServer(GetConnectionString()));
             return services;
         }

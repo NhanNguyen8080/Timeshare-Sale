@@ -85,6 +85,11 @@ namespace BackendTimeshareSale.Service.ServiceImp
             return _unitOfWork.UserRepo.GetAll(includes);
         }
 
+        public IQueryable<User> GetAllUserByRole(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes)
+        {
+            return _unitOfWork.UserRepo.GetAll(includes).Where(predicated);
+        }
+
         public User GetUser(int userId)
         {
             return _unitOfWork.UserRepo.GetAll().Where(_=>_.UserId.Equals(userId)).FirstOrDefault();

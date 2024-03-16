@@ -6,6 +6,10 @@ namespace BackendshareSale.Repo.Implements
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly TimeSharing2024DBContext _dbContext;
+        public UnitOfWork(TimeSharing2024DBContext dBContext)
+        {
+            this._dbContext = dBContext;
+        }
         private IGenericRepository<BankTransferTransaction> BankTransferTransactionRepository;
 
         private IGenericRepository<Booking> BookingRepository;
