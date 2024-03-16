@@ -32,6 +32,11 @@ namespace BackendshareSale.Repo.Implements
 
         private IGenericRepository<UserRole> UserRoleRepository;
 
+        public UnitOfWork(TimeSharing2024DBContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public IGenericRepository<BankTransferTransaction> BankTransferTransactionRepo
         {
             get

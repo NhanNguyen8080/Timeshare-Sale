@@ -1,18 +1,14 @@
-﻿using System;
+﻿using BackendshareSale.Repo.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-#nullable disable
-
-namespace BackendshareSale.Repo.Models
+namespace BackendshareSale.Repo.ViewModel
 {
-    public partial class Property
+    public class PropertyDTO
     {
-        public Property()
-        {
-            Bookings = new HashSet<Booking>();
-            BookmarkTimeShares = new HashSet<BookmarkTimeShare>();
-        }
-
         public int PropertyId { get; set; }
         public string PropertyName { get; set; }
         public string PropertyType { get; set; }
@@ -24,9 +20,12 @@ namespace BackendshareSale.Repo.Models
         public DateTime? LastUpdate { get; set; }
         public string Images { get; set; }
         public int? OwnerId { get; set; }
+    }
 
-        public virtual User? Owner { get; set; }
+    public class PropertyVM : PropertyDTO
+    {
         public virtual ICollection<Booking>? Bookings { get; set; }
         public virtual ICollection<BookmarkTimeShare>? BookmarkTimeShares { get; set; }
+
     }
 }

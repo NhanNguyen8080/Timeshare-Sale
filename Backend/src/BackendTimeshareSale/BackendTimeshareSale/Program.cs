@@ -1,4 +1,6 @@
+using AutoMapper;
 using BackendTimeshareSale.Extensions;
+using BackendTimeshareSale.Helper;
 
 namespace BackendTimeshareSale
 {
@@ -17,12 +19,19 @@ namespace BackendTimeshareSale
             builder.Services.AddDatabase();
             builder.Services.AddUnitOfWork();
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddSession(options =>
+            //builder.Services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
+            //    options.Cookie.HttpOnly = true;
+            //    options.Cookie.IsEssential = true;
+            //});
+            var mappingConfig = new MapperConfiguration(mc =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+                mc.AddProfile(new MappingProfile());
             });
+            IMapper mapper = mappingConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+            builder.Services.AddElasticSearch();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,7 +45,7 @@ namespace BackendTimeshareSale
 
             app.UseAuthorization();
             app.UseStaticFiles();
-            app.UseSession();
+            //app.UseSession();
             app.UseRouting();
 
             app.MapControllers();
