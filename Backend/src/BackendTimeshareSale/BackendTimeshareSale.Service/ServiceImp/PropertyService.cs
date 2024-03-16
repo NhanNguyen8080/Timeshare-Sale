@@ -25,13 +25,13 @@ namespace BackendTimeshareSale.Service.ServiceImp
             return percent;
         }
 
-        public double PercentOfBookingProperty(int bookingDate)
+       /* public double PercentOfBookingProperty(int bookingDate)
         {
             var total = _unitOfWork.PropertyRepo.GetAll().ToList().Count;
             var booking = _unitOfWork.BookingRepo.Get(_ => _.BookingDateTime.Value.Month.Equals(bookingDate)).ToList().Count;
             double percent = (double)booking / total;
 
             return percent;
-        }
+        }*/
     }
 }

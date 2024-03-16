@@ -14,6 +14,8 @@ namespace BackendshareSale.Repo.Implements
 
         private IGenericRepository<Booking> BookingRepository;
 
+        private IGenericRepository<BookingDetail> BookingDetailRepository;
+
         private IGenericRepository<BookmarkTimeShare> BookmarkTimeShareRepository;
 
         private IGenericRepository<CardTransaction> CardTransactionRepository;
@@ -24,8 +26,6 @@ namespace BackendshareSale.Repo.Implements
 
         private IGenericRepository<Payment> PaymentRepository;
 
-        private IGenericRepository<PaymentStatus> PaymentStatusRepository;
-
         private IGenericRepository<Property> PropertyRepository;
 
         private IGenericRepository<Role> RoleRepository;
@@ -34,13 +34,13 @@ namespace BackendshareSale.Repo.Implements
 
         private IGenericRepository<User> UserRepository;
 
-        private IGenericRepository<UserRole> UserRoleRepository;
+        private IGenericRepository<Investor> InvestorRepository;
 
         public IGenericRepository<BankTransferTransaction> BankTransferTransactionRepo
         {
             get
             {
-                if(this.BankTransferTransactionRepository == null)
+                if (this.BankTransferTransactionRepository == null)
                 {
                     this.BankTransferTransactionRepository = new GenericRepository<BankTransferTransaction>(_dbContext);
                 }
@@ -120,15 +120,15 @@ namespace BackendshareSale.Repo.Implements
             }
         }
 
-        public IGenericRepository<PaymentStatus> PaymentStatusRepo
+        public IGenericRepository<BookingDetail> BookingDetailRepo
         {
             get
             {
-                if (this.PaymentStatusRepository == null)
+                if (this.BookingDetailRepository == null)
                 {
-                    this.PaymentStatusRepository = new GenericRepository<PaymentStatus>(_dbContext);
+                    this.BookingDetailRepository = new GenericRepository<BookingDetail>(_dbContext);
                 }
-                return this.PaymentStatusRepository;
+                return this.BookingDetailRepository;
             }
         }
 
@@ -180,15 +180,15 @@ namespace BackendshareSale.Repo.Implements
             }
         }
 
-        public IGenericRepository<UserRole> UserRoleRepo
+        public IGenericRepository<Investor> InvestorRepo
         {
             get
             {
-                if (this.UserRoleRepository == null)
+                if (this.InvestorRepository == null)
                 {
-                    this.UserRoleRepository = new GenericRepository<UserRole>(_dbContext);
+                    this.InvestorRepository = new GenericRepository<Investor>(_dbContext);
                 }
-                return this.UserRoleRepository;
+                return this.InvestorRepository;
             }
         }
 

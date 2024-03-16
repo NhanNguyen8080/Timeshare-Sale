@@ -9,7 +9,7 @@ namespace BackendshareSale.Repo.Models
     {
         public Property()
         {
-            Bookings = new HashSet<Booking>();
+            BookingDetails = new HashSet<BookingDetail>();
             BookmarkTimeShares = new HashSet<BookmarkTimeShare>();
         }
 
@@ -25,8 +25,8 @@ namespace BackendshareSale.Repo.Models
         public byte[] Images { get; set; }
         public int? OwnerId { get; set; }
 
-        public virtual User Owner { get; set; }
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual Investor Owner { get; set; }
+        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
         public virtual ICollection<BookmarkTimeShare> BookmarkTimeShares { get; set; }
     }
 }

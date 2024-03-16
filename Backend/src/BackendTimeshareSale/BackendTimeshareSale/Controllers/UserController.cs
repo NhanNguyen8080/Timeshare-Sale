@@ -49,5 +49,8 @@ namespace BackendTimeshareSale.Controllers
 
             });
         }
+
+        /*[HttpGet]
+        public async Task<ActionResult> GetUserByRole()*/
     }
 }
