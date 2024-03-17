@@ -1,3 +1,4 @@
+using AutoMapper;
 using BackendTimeshareSale.Extensions;
 using BackendTimeshareSale.Service.IServices;
 using BackendTimeshareSale.Service.ServiceImp;

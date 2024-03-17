@@ -36,7 +36,7 @@ namespace BackendshareSale.Repo.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-E9T9GDT;Uid=sa;Pwd=12345;Database=TimeSharing2024DB");
+                optionsBuilder.UseSqlServer("Server=(local);uid=sa;pwd=12345;database=TimeSharing2024DB;TrustServerCertificate=True");
             }
         }
 
@@ -334,7 +334,7 @@ namespace BackendshareSale.Repo.Models
 
                 entity.Property(e => e.Country).HasMaxLength(100);
 
-                entity.Property(e => e.Images).HasColumnType("image");
+                entity.Property(e => e.Images).IsUnicode(false);
 
                 entity.Property(e => e.LastUpdate).HasColumnType("datetime");
 
