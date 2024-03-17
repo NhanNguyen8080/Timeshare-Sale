@@ -39,7 +39,7 @@ namespace BackendTimeshareSale.Service.ServiceImp
             return _mapper.Map<PropertyVM>(await _elasticsearchService.GetDocument(id));
         }
 
-        public int GetNumberOfProperties()
+        public int GetAllOfProperties()
         {
             var result = _unitOfWork.PropertyRepo.GetAll().ToList().Count;
             return result;
@@ -49,11 +49,26 @@ namespace BackendTimeshareSale.Service.ServiceImp
         {
             return _elasticsearchService.IndexData(entities);
         }
-        public double PercentOfAvailableProperty(int date)
+
+        public int NumberOfPropertiesAreAvailable(int month)
+        {
+            var available = _unitOfWork.BookingDetailRepo.Get(_ => _.CheckInDate.Value.Month > month || _.CheckOutDate.Value.Month < month).ToList().Count;
+
+            return available;
+        }
+
+        public int NumberOfPropertiesAreBooking(int month)
+        {
+            var booking = _unitOfWork.BookingDetailRepo.Get(_ => _.CheckInDate.Value.Month <= month && _.CheckOutDate.Value.Month >= month).ToList().Count;
+            return booking;
+        }
+
+        public double PercentOfAvailableProperty(int month)
         {
             var total = _unitOfWork.PropertyRepo.GetAll().ToList().Count;
-            var available = _unitOfWork.PropertyRepo.Get(_ => _.IsAvailable == true).ToList().Count;
+            var available = _unitOfWork.BookingDetailRepo.Get(_ => _.CheckInDate.Value.Month > month || _.CheckOutDate.Value.Month < month).ToList().Count;
             var percent = (double)available / total;
+
             return percent;
         }
 
@@ -163,14 +178,13 @@ namespace BackendTimeshareSale.Service.ServiceImp
             return "Index data failed!";
         }
 
-        public double PercentOfBookingProperty(int bookingDate)
+        public double PercentOfBookingProperty(int month)
         {
             var total = _unitOfWork.PropertyRepo.GetAll().ToList().Count;
-            var booking = _unitOfWork.BookingRepo.Get(_ => _.BookingDate.Value.Month.Equals(bookingDate)).ToList().Count;
+            var booking = _unitOfWork.BookingDetailRepo.Get(_ => _.CheckInDate.Value.Month <= month && _.CheckOutDate.Value.Month >= month).ToList().Count;
             double percent = (double)booking / total;
 
-            return percent;
+            return percent * 100;
         }
-
     }
 }

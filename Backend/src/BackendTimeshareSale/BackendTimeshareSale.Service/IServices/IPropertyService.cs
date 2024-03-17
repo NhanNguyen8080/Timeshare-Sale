@@ -16,8 +16,12 @@ namespace BackendTimeshareSale.Service.IServices
         Task<PropertyVM> GetById(int id);
         void InsertDataToSQL();
         Task<string> CreateDocument(Property entity);
-        int GetNumberOfProperties();
+        //int GetNumberOfProperties();
+        int GetAllOfProperties();
         double PercentOfAvailableProperty(int month);
-        double PercentOfBookingProperty(int bookingDate);
+        double PercentOfBookingProperty(int month);
+        int NumberOfPropertiesAreBooking(int month);
+        int NumberOfPropertiesAreAvailable(int month);
+
     }
 }

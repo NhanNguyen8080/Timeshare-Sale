@@ -25,6 +25,13 @@ namespace BackendTimeshareSale
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IContractService, ContractService>();
             builder.Services.AddScoped<IPropertyService, PropertyService>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
+            builder.Services.AddScoped<IInvestorService, InvestorService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
+            builder.Services.AddScoped<IStaffService, StaffService>();
+
+
+
             builder.Services.AddElasticSearch();
             var mappingConfig = new MapperConfiguration(mc =>
             {
