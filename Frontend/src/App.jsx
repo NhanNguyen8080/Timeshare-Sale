@@ -24,8 +24,8 @@ function App() {
           {/* <Route path="/search/:filter" element={<SearchResults />} /> */}
           <Route path="/properties" element={<Properties />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />
