@@ -2,6 +2,7 @@
 using BackendshareSale.Repo.Models;
 using BackendshareSale.Repo.ViewModel;
 using BackendTimeshareSale.Extensions;
+using BackendTimeshareSale.Helper;
 using BackendTimeshareSale.Service.IServices;
 using BackendTimeshareSale.Service.ServiceImp;
 using Microsoft.AspNetCore.Http;
@@ -66,10 +67,11 @@ namespace BackendTimeshareSale.Controllers
         [Route("/api/[controller]/getWithPaging")]
         public async Task<IActionResult> Get([FromQuery] int pageIndex, [FromQuery] int perPage)
         {
-            var todoItems = await _propertyService.GetAllProperties();
-            var totalCount = todoItems.ToList().Count;
+            var query = await _propertyService.GetAllProperties();
+            var totalCount = query.ToList().Count;
             var totalPages = Math.Ceiling(totalCount / 10.0);
-            if (todoItems == null || totalCount == 0)
+            var properties = query.ToPageList(pageIndex, perPage);
+            if (properties == null || totalCount == 0)
             {
                 return NotFound(new BaseResponseWithPaging<List<PropertyVM>>
                 {
@@ -91,7 +93,7 @@ namespace BackendTimeshareSale.Controllers
                 per_page = perPage,
                 total = totalCount,
                 total_pages = totalPages,
-                data = todoItems,
+                data = properties,
 
             });
         }
@@ -108,10 +110,12 @@ namespace BackendTimeshareSale.Controllers
         [Route("/api/[controller]/searchWithPaging")]
         public async Task<IActionResult> Get([FromQuery] string keyword, [FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
-            var todoItems = await _propertyService.SearchProperties(keyword);
-            var totalCount = todoItems.ToList().Count;
+            var query = await _propertyService.SearchProperties(keyword);
+            var totalCount = query.ToList().Count;
             var totalPages = Math.Ceiling(totalCount / 10.0);
-            if (todoItems == null || totalCount == 0)
+            var properties = query.ToPageList(pageIndex, pageSize);
+
+            if (properties == null || totalCount == 0)
             {
                 return NotFound(new BaseResponseWithPaging<List<PropertyVM>>
                 {
@@ -133,7 +137,7 @@ namespace BackendTimeshareSale.Controllers
                 per_page = pageSize,
                 total = totalCount,
                 total_pages = totalPages,
-                data = todoItems,
+                data = properties,
 
             });
         }
