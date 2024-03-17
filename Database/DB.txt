@@ -28,6 +28,7 @@ CREATE TABLE Users(
   IsActive bit,
   PhoneNumber varchar(20) not null,
   RefreshToken nvarchar(MAX),
+  RoleID int references Roles(RoleID)
 )
 GO
 CREATE TABLE Staffs(
@@ -42,13 +43,7 @@ CREATE TABLE Staffs(
   UserID int references Users(UserID)
 )
 GO
-CREATE TABLE UserRoles(
-  ID int IDENTITY(1,1) PRIMARY KEY,
-  Name nvarchar(60) not null,
-  RoleID int references Roles(RoleID),
-  UserID int references Users(UserID)
-)
-Go
+
 CREATE TABLE Customers(
   CusID int IDENTITY(1,1) PRIMARY KEY,
   FirstName nvarchar(60) not null,
@@ -61,7 +56,22 @@ CREATE TABLE Customers(
   DateOfBirth DateTime,
   CusAddress nvarchar(max),
   IsActive bit,
-  BookingHistory int,
+  RoleID int references Roles(RoleID)
+)
+GO
+CREATE TABLE Investors(
+  InvestorID int IDENTITY(1,1) PRIMARY KEY,
+  FirstName nvarchar(60) not null,
+  LastName nvarchar(60) not null,
+  Email nvarchar(60) unique,
+  Gender nvarchar(10),
+  CitizenID nvarchar(50) unique,
+  PhoneNumber varchar(20) not null,
+  Country nvarchar(60),
+  DateOfBirth DateTime,
+  Address nvarchar(max),
+  IsActive bit,
+  Revenue int,
   RoleID int references Roles(RoleID)
 )
 GO
@@ -75,8 +85,8 @@ CREATE TABLE Properties(
   IsAvailable bit,
   Description nvarchar(max),
   LastUpdate DateTime,
-  Images image,
-  OwnerID int references Users(UserID)
+  Images nvarchar(max),
+  OwnerID int references Investors(InvestorID)
 )
 GO
 CREATE TABLE BookmarkTimeShares(
@@ -90,16 +100,21 @@ CREATE TABLE Bookings(
   BookingID int IDENTITY(1,1) PRIMARY KEY,
   CustomerID int references Customers(CusID),
   UserID int references Users(UserID),
-  StaffID int references Staffs(StaffID),
+  BookingDate Datetime
+)
+GO
+CREATE TABLE BookingDetails(
+  BookingDetailID int IDENTITY(1,1) PRIMARY KEY,
   PropertyID int references Properties(PropertyID),
-  BookingDateTime Datetime,
   CheckInDate Datetime,
   CheckOutDate Datetime,
   TotalPrice decimal(10,2),
   Deposits decimal(10,2),
   BookingStatus nvarchar(50),
   PaymentStatus nvarchar(50),
-  BookingDetails nvarchar(max),
+  Note nvarchar(max),
+  BookingID int references Bookings(BookingID),
+  StaffID int references Staffs(StaffID),
 )
 GO
 
@@ -116,23 +131,12 @@ CREATE TABLE Contracts(
   OtherContractDetails nvarchar(max)
 )
 GO
-
-CREATE TABLE PaymentStatus(
-  PaymentStatusID int IDENTITY(1,1) PRIMARY KEY,
-  PaymentStatusName nvarchar(100) not null,
-  Description nvarchar(max),
-  )
-GO
-INSERT INTO PaymentStatus VALUES(N'Thành công', 'Thanh toán giao dịch thành công');
-INSERT INTO PaymentStatus VALUES(N'Thất bại', 'Thanh toán giao dịch thất bại');
-INSERT INTO PaymentStatus VALUES(N'Đang chờ xử lý', 'Thanh toán giao dịch đang chờ xử lý');
-GO
 CREATE TABLE Payments(
   PaymentID int IDENTITY(1,1) PRIMARY KEY,
   PaymentType nvarchar(20),
   OrtherPaymentDetails nvarchar(200),
   ContractID int references Contracts(ContractID),
-  PaymentStatusID int references PaymentStatus(PaymentStatusID),
+  PaymentStatus nvarchar(100),
   BookingID int references Bookings(BookingID),
   )
 GO
@@ -159,11 +163,9 @@ CREATE TABLE CardTransactions(
   CardHolderName nvarchar(100),
   CardNumber nvarchar(30),
   ExpiryDate DateTime,
-  CVV nvarchar(50),
   TransferAmount nvarchar(100),
   TransferDateTime nvarchar(100),
   TransferStatus nvarchar(100),
   OtherTransferDetails nvarchar(100),
   )
 GO
-

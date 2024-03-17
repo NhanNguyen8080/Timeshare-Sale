@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace BackendshareSale.Repo.Implements
 {
-    internal class GenericRepository<T>  : IGenericRepository<T> where T : class
+    internal class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly TimeSharing2024DBContext _dbContext;
         private readonly DbSet<T> _dbSet;
@@ -79,7 +79,7 @@ namespace BackendshareSale.Repo.Implements
         public IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> result = this._dbSet;
-            foreach(var expression in includes)
+            foreach (var expression in includes)
             {
                 result = result.Include(expression);
             }

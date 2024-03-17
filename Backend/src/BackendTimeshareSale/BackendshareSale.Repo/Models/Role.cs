@@ -10,7 +10,8 @@ namespace BackendshareSale.Repo.Models
         public Role()
         {
             Customers = new HashSet<Customer>();
-            UserRoles = new HashSet<UserRole>();
+            Investors = new HashSet<Investor>();
+            Users = new HashSet<User>();
         }
 
         public int RoleId { get; set; }
@@ -18,6 +19,7 @@ namespace BackendshareSale.Repo.Models
         public string Description { get; set; }
 
         public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<Investor> Investors { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

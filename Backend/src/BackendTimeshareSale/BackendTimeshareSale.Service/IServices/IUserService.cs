@@ -40,5 +40,6 @@ namespace BackendTimeshareSale.Service.IServices
         IQueryable<User> GetAllUser();
 
         IQueryable<User> GetAllUser(params Expression<Func<User, object>>[] includes);
+        IQueryable<User> GetAllUserByRole(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes);
     }
 }

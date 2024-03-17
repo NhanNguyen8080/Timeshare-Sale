@@ -5,27 +5,28 @@ using System.Collections.Generic;
 
 namespace BackendshareSale.Repo.Models
 {
-    public partial class Customer
+    public partial class Investor
     {
-        public Customer()
+        public Investor()
         {
-            Bookings = new HashSet<Booking>();
+            Properties = new HashSet<Property>();
         }
 
-        public int CusId { get; set; }
+        public int InvestorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string CusEmail { get; set; }
+        public string Email { get; set; }
         public string Gender { get; set; }
         public string CitizenId { get; set; }
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string CusAddress { get; set; }
+        public string Address { get; set; }
         public bool? IsActive { get; set; }
+        public int? Revenue { get; set; }
         public int? RoleId { get; set; }
 
         public virtual Role Role { get; set; }
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
     }
 }

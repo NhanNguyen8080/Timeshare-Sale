@@ -8,15 +8,16 @@ namespace BackendTimeshareSale.Service.ServiceImp
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UserService(IUnitOfWork unitOfWork) {
-        _unitOfWork = unitOfWork;
-        
+        public UserService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+
         }
 
         public void CreateOrUpdate(User user)
         {
-           User existedUser = _unitOfWork.UserRepo.Get(_ => _.UserId.Equals(user.UserId)).FirstOrDefault();
-            if(existedUser != null)
+            User existedUser = _unitOfWork.UserRepo.Get(_ => _.UserId.Equals(user.UserId)).FirstOrDefault();
+            if (existedUser != null)
             {
                 existedUser.UserName = user.UserName;
                 existedUser.HashPassword = user.HashPassword;
@@ -69,7 +70,7 @@ namespace BackendTimeshareSale.Service.ServiceImp
         public void DeleteUser(Expression<Func<User, bool>> predicated)
         {
             User existedUser = _unitOfWork.UserRepo.Get(predicated).FirstOrDefault();
-            if(existedUser != null)
+            if (existedUser != null)
             {
                 _unitOfWork.UserRepo.Delete(existedUser);
             }
@@ -85,9 +86,14 @@ namespace BackendTimeshareSale.Service.ServiceImp
             return _unitOfWork.UserRepo.GetAll(includes);
         }
 
+        public IQueryable<User> GetAllUserByRole(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes)
+        {
+            return _unitOfWork.UserRepo.GetAll(includes).Where(predicated);
+        }
+
         public User GetUser(int userId)
         {
-            return _unitOfWork.UserRepo.GetAll().Where(_=>_.UserId.Equals(userId)).FirstOrDefault();
+            return _unitOfWork.UserRepo.GetAll().Where(_ => _.UserId.Equals(userId)).FirstOrDefault();
         }
 
         public User GetUser(int userId, params Expression<Func<User, object>>[] includes)
@@ -107,7 +113,7 @@ namespace BackendTimeshareSale.Service.ServiceImp
 
         public IQueryable<User> SearchUser(Expression<Func<User, bool>> predicated)
         {
-           return _unitOfWork.UserRepo.GetAll().Where(predicated);
+            return _unitOfWork.UserRepo.GetAll().Where(predicated);
         }
 
         public IQueryable<User> SearchUser(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes)

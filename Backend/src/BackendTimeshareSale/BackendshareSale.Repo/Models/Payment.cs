@@ -17,12 +17,11 @@ namespace BackendshareSale.Repo.Models
         public string PaymentType { get; set; }
         public string OrtherPaymentDetails { get; set; }
         public int? ContractId { get; set; }
-        public int? PaymentStatusId { get; set; }
+        public string PaymentStatus { get; set; }
         public int? BookingId { get; set; }
 
         public virtual Booking Booking { get; set; }
         public virtual Contract Contract { get; set; }
-        public virtual PaymentStatus PaymentStatus { get; set; }
         public virtual ICollection<BankTransferTransaction> BankTransferTransactions { get; set; }
         public virtual ICollection<CardTransaction> CardTransactions { get; set; }
     }
