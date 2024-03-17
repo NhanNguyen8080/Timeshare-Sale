@@ -24,10 +24,27 @@ namespace BackendTimeshareSale.Controllers
         }
 
         [HttpGet()]
+        [Route("/api/[controller]/InsertDataToSQL")]
         public async Task<IActionResult> InsertData()
         {
             _propertyService.InsertDataToSQL();
-            return Ok("Insert successully!");
+            
+            return Ok("Insert data successfully!");
+           
+        }
+
+        [HttpPost()]
+        [Route("/api/[controller]/IndexDataToElasticSearch")]
+        public async Task<IActionResult> IndexAsync()
+        {
+            var query = _unitOfWork.PropertyRepo.GetAll();
+            var result = query.ToList();
+            var checkIndex = await _propertyService.IndexData(result);
+            if (checkIndex)
+            {
+                return Ok("Saved successfully!");
+            }
+            return BadRequest("Index data failed!");
         }
 
         [HttpGet()]
@@ -142,17 +159,6 @@ namespace BackendTimeshareSale.Controllers
             });
         }
 
-        [HttpPost("/post")]
-        public async Task<IActionResult> IndexAsync()
-        {
-            var query = _unitOfWork.PropertyRepo.GetAll();
-            var result = query.ToList();
-            var checkIndex = await _propertyService.IndexData(result);
-            if (checkIndex)
-            {
-                return Ok("Saved successfully!");
-            }
-            return BadRequest("Index data failed!");
-        }
+        
     }
 }

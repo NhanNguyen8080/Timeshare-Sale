@@ -11,8 +11,6 @@ namespace BackendshareSale.Repo.Models
         {
             Bookings = new HashSet<Booking>();
             BookmarkTimeShares = new HashSet<BookmarkTimeShare>();
-            Properties = new HashSet<Property>();
-            UserRoles = new HashSet<UserRole>();
             staff = new HashSet<Staff>();
         }
 
@@ -29,11 +27,11 @@ namespace BackendshareSale.Repo.Models
         public bool? IsActive { get; set; }
         public string PhoneNumber { get; set; }
         public string RefreshToken { get; set; }
+        public int? RoleId { get; set; }
 
+        public virtual Role Role { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<BookmarkTimeShare> BookmarkTimeShares { get; set; }
-        public virtual ICollection<Property> Properties { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual ICollection<Staff> staff { get; set; }
     }
 }

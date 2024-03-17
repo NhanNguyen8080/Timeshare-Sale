@@ -20,7 +20,6 @@ namespace BackendshareSale.Repo.Implements
 
         private IGenericRepository<Payment> PaymentRepository;
 
-        private IGenericRepository<PaymentStatus> PaymentStatusRepository;
 
         private IGenericRepository<Property> PropertyRepository;
 
@@ -30,7 +29,6 @@ namespace BackendshareSale.Repo.Implements
 
         private IGenericRepository<User> UserRepository;
 
-        private IGenericRepository<UserRole> UserRoleRepository;
 
         public UnitOfWork(TimeSharing2024DBContext dbContext)
         {
@@ -121,18 +119,6 @@ namespace BackendshareSale.Repo.Implements
             }
         }
 
-        public IGenericRepository<PaymentStatus> PaymentStatusRepo
-        {
-            get
-            {
-                if (this.PaymentStatusRepository == null)
-                {
-                    this.PaymentStatusRepository = new GenericRepository<PaymentStatus>(_dbContext);
-                }
-                return this.PaymentStatusRepository;
-            }
-        }
-
         public IGenericRepository<Property> PropertyRepo
         {
             get
@@ -178,18 +164,6 @@ namespace BackendshareSale.Repo.Implements
                     this.UserRepository = new GenericRepository<User>(_dbContext);
                 }
                 return this.UserRepository;
-            }
-        }
-
-        public IGenericRepository<UserRole> UserRoleRepo
-        {
-            get
-            {
-                if (this.UserRoleRepository == null)
-                {
-                    this.UserRoleRepository = new GenericRepository<UserRole>(_dbContext);
-                }
-                return this.UserRoleRepository;
             }
         }
 

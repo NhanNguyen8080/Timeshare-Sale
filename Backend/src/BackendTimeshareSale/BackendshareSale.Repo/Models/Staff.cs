@@ -9,7 +9,7 @@ namespace BackendshareSale.Repo.Models
     {
         public Staff()
         {
-            Bookings = new HashSet<Booking>();
+            BookingDetails = new HashSet<BookingDetail>();
         }
 
         public int StaffId { get; set; }
@@ -23,6 +23,6 @@ namespace BackendshareSale.Repo.Models
         public int? UserId { get; set; }
 
         public virtual User User { get; set; }
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<BookingDetail> BookingDetails { get; set; }
     }
 }

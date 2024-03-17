@@ -11,11 +11,9 @@ namespace BackendshareSale.Repo.Interfaces
         IGenericRepository<Contract> ContractRepo { get; }
         IGenericRepository<Customer> CustomerRepo { get; }
         IGenericRepository<Payment> PaymentRepo { get; }
-        IGenericRepository<PaymentStatus> PaymentStatusRepo { get; }
         IGenericRepository<Property> PropertyRepo { get; }
         IGenericRepository<Role> RoleRepo { get; }
         IGenericRepository<Staff> StaffRepo { get; }
         IGenericRepository<User> UserRepo { get; }
-        IGenericRepository<UserRole> UserRoleRepo { get; }
     }
 }
