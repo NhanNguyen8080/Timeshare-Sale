@@ -79,14 +79,14 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Payment)
                     .WithMany(p => p.BankTransferTransactions)
                     .HasForeignKey(d => d.PaymentId)
-                    .HasConstraintName("FK__BankTrans__Payme__4D94879B");
+                    .HasConstraintName("FK__BankTrans__Payme__60A75C0F");
             });
 
             modelBuilder.Entity<Booking>(entity =>
             {
                 entity.Property(e => e.BookingId).HasColumnName("BookingID");
 
-                entity.Property(e => e.BookingDateTime).HasColumnType("datetime");
+                entity.Property(e => e.BookingDate).HasColumnType("datetime");
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
@@ -95,12 +95,12 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Bookings__Custom__3E52440B");
+                    .HasConstraintName("FK__Bookings__Custom__5165187F");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Bookings__UserID__3F466844");
+                    .HasConstraintName("FK__Bookings__UserID__52593CB8");
             });
 
             modelBuilder.Entity<BookingDetail>(entity =>
@@ -125,20 +125,20 @@ namespace BackendshareSale.Repo.Models
 
                 entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
 
-                //entity.HasOne(d => d.Booking)
-                //    .WithMany(p => p.BookingDetails)
-                //    .HasForeignKey(d => d.BookingId)
-                //    .HasConstraintName("FK__BookingDe__Booki__4316F928");
+                entity.HasOne(d => d.Booking)
+                    .WithMany(p => p.BookingDetails)
+                    .HasForeignKey(d => d.BookingId)
+                    .HasConstraintName("FK__BookingDe__Booki__5629CD9C");
 
                 entity.HasOne(d => d.Property)
                     .WithMany(p => p.BookingDetails)
                     .HasForeignKey(d => d.PropertyId)
-                    .HasConstraintName("FK__BookingDe__Prope__4222D4EF");
+                    .HasConstraintName("FK__BookingDe__Prope__5535A963");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.BookingDetails)
                     .HasForeignKey(d => d.StaffId)
-                    .HasConstraintName("FK__BookingDe__Staff__440B1D61");
+                    .HasConstraintName("FK__BookingDe__Staff__571DF1D5");
             });
 
             modelBuilder.Entity<BookmarkTimeShare>(entity =>
@@ -152,12 +152,12 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Property)
                     .WithMany(p => p.BookmarkTimeShares)
                     .HasForeignKey(d => d.PropertyId)
-                    .HasConstraintName("FK__BookmarkT__Prope__3B75D760");
+                    .HasConstraintName("FK__BookmarkT__Prope__4E88ABD4");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.BookmarkTimeShares)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__BookmarkT__UserI__3A81B327");
+                    .HasConstraintName("FK__BookmarkT__UserI__4D94879B");
             });
 
             modelBuilder.Entity<CardTransaction>(entity =>
@@ -187,7 +187,7 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Payment)
                     .WithMany(p => p.CardTransactions)
                     .HasForeignKey(d => d.PaymentId)
-                    .HasConstraintName("FK__CardTrans__Payme__5070F446");
+                    .HasConstraintName("FK__CardTrans__Payme__6383C8BA");
             });
 
             modelBuilder.Entity<Contract>(entity =>
@@ -209,18 +209,18 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Booking)
                     .WithMany(p => p.Contracts)
                     .HasForeignKey(d => d.BookingId)
-                    .HasConstraintName("FK__Contracts__Booki__46E78A0C");
+                    .HasConstraintName("FK__Contracts__Booki__59FA5E80");
             });
 
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasKey(e => e.CusId)
-                    .HasName("PK__Customer__2F187130EB78B2CC");
+                    .HasName("PK__Customer__2F187130EF79D4F8");
 
-                entity.HasIndex(e => e.CusEmail, "UQ__Customer__60A7203FEE97A95E")
+                entity.HasIndex(e => e.CusEmail, "UQ__Customer__60A7203FF6A4DC0F")
                     .IsUnique();
 
-                entity.HasIndex(e => e.CitizenId, "UQ__Customer__6E49FBEDF7E40614")
+                entity.HasIndex(e => e.CitizenId, "UQ__Customer__6E49FBEDEC4D3506")
                     .IsUnique();
 
                 entity.Property(e => e.CusId).HasColumnName("CusID");
@@ -255,15 +255,15 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Customers)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__Customers__RoleI__300424B4");
+                    .HasConstraintName("FK__Customers__RoleI__4316F928");
             });
 
             modelBuilder.Entity<Investor>(entity =>
             {
-                entity.HasIndex(e => e.CitizenId, "UQ__Investor__6E49FBED9C2C34F7")
+                entity.HasIndex(e => e.CitizenId, "UQ__Investor__6E49FBED84ECD40A")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Email, "UQ__Investor__A9D105347B5530BF")
+                entity.HasIndex(e => e.Email, "UQ__Investor__A9D105341E80AD66")
                     .IsUnique();
 
                 entity.Property(e => e.InvestorId).HasColumnName("InvestorID");
@@ -298,7 +298,7 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Investors)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__Investors__RoleI__34C8D9D1");
+                    .HasConstraintName("FK__Investors__RoleI__47DBAE45");
             });
 
             modelBuilder.Entity<Payment>(entity =>
@@ -318,12 +318,12 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Booking)
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.BookingId)
-                    .HasConstraintName("FK__Payments__Bookin__4AB81AF0");
+                    .HasConstraintName("FK__Payments__Bookin__5DCAEF64");
 
                 entity.HasOne(d => d.Contract)
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.ContractId)
-                    .HasConstraintName("FK__Payments__Contra__49C3F6B7");
+                    .HasConstraintName("FK__Payments__Contra__5CD6CB2B");
             });
 
             modelBuilder.Entity<Property>(entity =>
@@ -333,8 +333,6 @@ namespace BackendshareSale.Repo.Models
                 entity.Property(e => e.Address).HasMaxLength(500);
 
                 entity.Property(e => e.Country).HasMaxLength(100);
-
-                entity.Property(e => e.Images).IsUnicode(false);
 
                 entity.Property(e => e.LastUpdate).HasColumnType("datetime");
 
@@ -351,7 +349,7 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Owner)
                     .WithMany(p => p.Properties)
                     .HasForeignKey(d => d.OwnerId)
-                    .HasConstraintName("FK__Propertie__Owner__37A5467C");
+                    .HasConstraintName("FK__Propertie__Owner__4AB81AF0");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -384,15 +382,15 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.staff)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Staffs__UserID__2B3F6F97");
+                    .HasConstraintName("FK__Staffs__UserID__3E52440B");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasIndex(e => e.EmailAddress, "UQ__Users__49A14740AF311B38")
+                entity.HasIndex(e => e.EmailAddress, "UQ__Users__49A147404DA3E7FD")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Users__C9F28456A0046476")
+                entity.HasIndex(e => e.UserName, "UQ__Users__C9F284563494B652")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -431,7 +429,7 @@ namespace BackendshareSale.Repo.Models
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__Users__RoleID__286302EC");
+                    .HasConstraintName("FK__Users__RoleID__3B75D760");
             });
 
             OnModelCreatingPartial(modelBuilder);
