@@ -13,9 +13,16 @@ namespace BackendTimeshareSale.Controllers
             this.contractService = contractService;
         }
         [HttpGet]
-        public async Task<ActionResult> GetContractUser()
+        public async Task<ActionResult> GetContractAreSigned()
         {
             int result = contractService.GetContractsAreCompleted();
+
+            return Ok(result);
+        }
+        [HttpGet("total/{month}")]
+        public async Task<ActionResult> GetRevenueByMonth(int month)
+        {
+            decimal result = contractService.GetRevenueByMonth(month);
 
             return Ok(result);
         }

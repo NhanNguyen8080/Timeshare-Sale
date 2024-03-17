@@ -17,8 +17,9 @@ namespace BackendTimeshareSale.Service.ServiceImp
         }
         public int GetInvestorCount()
         {
-            //_unitOfWork.InvestorRepo.GetAll().Count();
-            return 1;
+            var result1 = _unitOfWork.InvestorRepo.GetAll().Count();
+            var result2 = _unitOfWork.UserRepo.Get(_ => _.RoleId == 3).Count();
+            return result1 + result2;
         }
     }
 }

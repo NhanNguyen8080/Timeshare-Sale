@@ -3,5 +3,7 @@
     public interface IContractService
     {
         int GetContractsAreCompleted();
+        decimal GetRevenueByMonth(int month);
+
     }
 }

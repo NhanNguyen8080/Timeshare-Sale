@@ -18,7 +18,9 @@ namespace BackendTimeshareSale.Service.ServiceImp
 
         public int GetCustomerCount()
         {
-            return _unitOfWork.CustomerRepo.GetAll().Count();
+            var result1 = _unitOfWork.UserRepo.Get(_ => _.RoleId == 4).Count();
+            var result2 = _unitOfWork.CustomerRepo.GetAll().Count();
+            return result1 + result2;
         }
     }
 }

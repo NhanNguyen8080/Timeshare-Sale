@@ -20,5 +20,16 @@ namespace BackendTimeshareSale.Service.ServiceImp
             var result = unitOfWork.ContractRepo.Get(_ => _.ContractStatus.ToUpper().Equals("DA KY")).ToList();
             return result.Count;
         }
+
+        public decimal GetRevenueByMonth(int month)
+        {
+            var list = unitOfWork.ContractRepo.Get(_ => _.ContractStatus.ToUpper().Equals("DA KY") && _.ContractDate.Value.Month == month).ToList();
+            decimal? total = 0;
+            foreach(var money in list)
+            {
+                total += money.Price;
+            }
+            return (decimal)total;
+        }
     }
 }

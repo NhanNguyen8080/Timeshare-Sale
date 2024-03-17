@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendTimeshareSale", "Bac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendshareSale.Repo", "BackendshareSale.Repo\BackendshareSale.Repo.csproj", "{896C1C69-8474-4266-9CDA-76316125313E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTimeshareSale.Service", "BackendTimeshareSale.Service\BackendTimeshareSale.Service.csproj", "{D2B89180-9676-4F83-BE4F-D681FEE852CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendTimeshareSale.Service", "BackendTimeshareSale.Service\BackendTimeshareSale.Service.csproj", "{D2B89180-9676-4F83-BE4F-D681FEE852CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
