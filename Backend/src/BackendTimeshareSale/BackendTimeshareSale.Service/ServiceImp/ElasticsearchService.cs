@@ -33,7 +33,7 @@ namespace BackendTimeshareSale.Service.ServiceImp
 
         public async Task<IEnumerable<T>> GetAllDocuments()
         {
-            var response = await _elasticClient.SearchAsync<T>(_ => _.MatchAll().Size(5000));
+            var response = await _elasticClient.SearchAsync<T>(_ => _.MatchAll().Size(10000));
             var result = response.Documents;
             return response.Documents;
         }

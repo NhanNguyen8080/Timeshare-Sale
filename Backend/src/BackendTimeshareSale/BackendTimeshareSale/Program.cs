@@ -1,5 +1,6 @@
 using AutoMapper;
 using BackendTimeshareSale.Extensions;
+using BackendTimeshareSale.Helper;
 using BackendTimeshareSale.Service.IServices;
 using BackendTimeshareSale.Service.ServiceImp;
 
@@ -24,8 +25,13 @@ namespace BackendTimeshareSale
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IContractService, ContractService>();
             builder.Services.AddScoped<IPropertyService, PropertyService>();
-
-
+            builder.Services.AddElasticSearch();
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
             /* builder.Services.AddSession(options =>
              {
                  options.IdleTimeout = TimeSpan.FromMinutes(30);

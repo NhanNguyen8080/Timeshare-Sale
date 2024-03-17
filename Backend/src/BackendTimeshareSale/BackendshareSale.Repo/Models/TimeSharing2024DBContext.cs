@@ -86,7 +86,7 @@ namespace BackendshareSale.Repo.Models
             {
                 entity.Property(e => e.BookingId).HasColumnName("BookingID");
 
-                entity.Property(e => e.BookingDate).HasColumnType("datetime");
+                entity.Property(e => e.BookingDateTime).HasColumnType("datetime");
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
@@ -125,10 +125,10 @@ namespace BackendshareSale.Repo.Models
 
                 entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
 
-                entity.HasOne(d => d.Booking)
-                    .WithMany(p => p.BookingDetails)
-                    .HasForeignKey(d => d.BookingId)
-                    .HasConstraintName("FK__BookingDe__Booki__4316F928");
+                //entity.HasOne(d => d.Booking)
+                //    .WithMany(p => p.BookingDetails)
+                //    .HasForeignKey(d => d.BookingId)
+                //    .HasConstraintName("FK__BookingDe__Booki__4316F928");
 
                 entity.HasOne(d => d.Property)
                     .WithMany(p => p.BookingDetails)
