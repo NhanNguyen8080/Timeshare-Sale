@@ -85,7 +85,7 @@ CREATE TABLE Properties(
   IsAvailable bit,
   Description nvarchar(max),
   LastUpdate DateTime,
-  Images image,
+  Images nvarchar(max),
   OwnerID int references Investors(InvestorID)
 )
 GO
