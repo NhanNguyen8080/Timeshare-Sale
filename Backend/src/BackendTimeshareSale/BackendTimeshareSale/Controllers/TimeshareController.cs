@@ -30,12 +30,19 @@ namespace BackendTimeshareSale.Controllers
             return Ok("Insert successully!");
         }
 
-        [HttpGet()]
-        [Route("/api/[controller]/getAll")]
-        public async Task<IActionResult> GetAll()
+
+        [HttpPost()]
+        [Route("/api/[controller]/insertDataToSQL")]
+        public async Task<IActionResult> IndexAsync()
         {
-            var document = _unitOfWork.PropertyRepo.Get(_ => _.PropertyId > 20000 && _.PropertyId < 22000).ToList();
-            return Ok(document);
+            var query = _unitOfWork.PropertyRepo.Get();
+            //var result = query.ToList();
+            var checkIndex = await _propertyService.IndexData(query);
+            if (checkIndex)
+            {
+                return Ok("Saved successfully!");
+            }
+            return BadRequest("Index data failed!");
         }
 
         [HttpPost()]
@@ -56,7 +63,7 @@ namespace BackendTimeshareSale.Controllers
         }
 
         [HttpGet()]
-        [Route("/api/[controller]/get")]
+        [Route("/api/[controller]/getAll")]
         public async Task<IActionResult> Get()
         {
             var document = await _propertyService.GetAllProperties();
@@ -142,17 +149,5 @@ namespace BackendTimeshareSale.Controllers
             });
         }
 
-        [HttpPost("/post")]
-        public async Task<IActionResult> IndexAsync()
-        {
-            var query = _unitOfWork.PropertyRepo.Get(_ => _.PropertyId > 8638);
-            //var result = query.ToList();
-            var checkIndex = await _propertyService.IndexData(query);
-            if (checkIndex)
-            {
-                return Ok("Saved successfully!");
-            }
-            return BadRequest("Index data failed!");
-        }
     }
 }
