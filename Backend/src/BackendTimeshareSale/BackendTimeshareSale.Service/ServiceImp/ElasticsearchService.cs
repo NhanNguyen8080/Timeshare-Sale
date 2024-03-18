@@ -50,14 +50,14 @@ namespace BackendTimeshareSale.Service.ServiceImp
             var searchResponse = await _elasticClient.SearchAsync<T>(s => s
                 .Query(
                     q => q.QueryString(
-                        qs => qs.Query('*' + keyword + '*')
+                        qs => qs.Query('*'+keyword+'*')
                     )
                 ).Size(10000)
             );
 
             if (searchResponse.IsValid)
             {
-                var result = searchResponse.Documents;
+                var result = searchResponse.Documents.ToList();
                 return result;
             }
             else

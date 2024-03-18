@@ -145,9 +145,9 @@ namespace BackendTimeshareSale.Controllers
         [HttpPost("/post")]
         public async Task<IActionResult> IndexAsync()
         {
-            var query = _unitOfWork.PropertyRepo.GetAll();
-            var result = query.ToList();
-            var checkIndex = await _propertyService.IndexData(result);
+            var query = _unitOfWork.PropertyRepo.Get(_ => _.PropertyId > 8638);
+            //var result = query.ToList();
+            var checkIndex = await _propertyService.IndexData(query);
             if (checkIndex)
             {
                 return Ok("Saved successfully!");
