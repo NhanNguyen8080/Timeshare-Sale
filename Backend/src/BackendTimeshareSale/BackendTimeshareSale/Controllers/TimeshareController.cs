@@ -47,14 +47,6 @@ namespace BackendTimeshareSale.Controllers
             return BadRequest("Index data failed!");
         }
 
-        [HttpGet()]
-        [Route("/api/[controller]/getAll")]
-        public async Task<IActionResult> GetAll()
-        {
-            var document = _unitOfWork.PropertyRepo.Get(_ => _.PropertyId > 20000 && _.PropertyId < 22000).ToList();
-            return Ok(document);
-        }
-
         [HttpPost()]
         [Route("/api/[controller]/indexDocument")]
         public async Task<IActionResult> CreateDocument([FromBody] Property property)
@@ -73,7 +65,7 @@ namespace BackendTimeshareSale.Controllers
         }
 
         [HttpGet()]
-        [Route("/api/[controller]/get")]
+        [Route("/api/[controller]/getAll")]
         public async Task<IActionResult> Get()
         {
             var document = await _propertyService.GetAllProperties();
