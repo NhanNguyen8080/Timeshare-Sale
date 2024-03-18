@@ -79,7 +79,7 @@ namespace BackendTimeshareSale.Service.ServiceImp
             {
                 var indexResponse = await _elasticClient.IndexManyAsync(entities);
 
-                if (!indexResponse.IsValid)
+                if (!indexResponse.IsValid) 
                 {
                     // Handle indexing failure
                     Console.WriteLine($"Bulk indexing failed: {indexResponse.DebugInformation}");
