@@ -23,16 +23,16 @@ namespace BackendTimeshareSale.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet()]
+        [HttpPost()]
+        [Route("/api/[controller]/insertDataToSQL")]
         public async Task<IActionResult> InsertData()
         {
             _propertyService.InsertDataToSQL();
             return Ok("Insert successully!");
         }
 
-
         [HttpPost()]
-        [Route("/api/[controller]/insertDataToSQL")]
+        [Route("/api/[controller]/indexDocument")]
         public async Task<IActionResult> IndexAsync()
         {
             var query = _unitOfWork.PropertyRepo.Get();
@@ -44,15 +44,6 @@ namespace BackendTimeshareSale.Controllers
             }
             return BadRequest("Index data failed!");
         }
-
-        [HttpPost()]
-        [Route("/api/[controller]/indexDocument")]
-        public async Task<IActionResult> CreateDocument([FromBody] Property property)
-        {
-            var result = await _propertyService.CreateDocument(property);
-            return Ok(result);
-        }
-
 
         [HttpGet()]
         [Route("/api/[controller]/get/{id}")]
