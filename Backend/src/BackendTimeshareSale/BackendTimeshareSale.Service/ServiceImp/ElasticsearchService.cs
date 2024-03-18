@@ -38,10 +38,17 @@ namespace BackendTimeshareSale.Service.ServiceImp
             return response.Documents;
         }
 
-        public async Task<T> GetDocument(int id)
+        public T GetDocument(int id)
         {
-            var response = await _elasticClient.GetAsync<T>(new DocumentPath<T>(id));
-            return response.Source;
+            var searchResponse = _elasticClient.Search<T>(s => s
+            .Query(q => q
+                .Term(t => t
+                    .Field("propertyId")
+                    .Value(id)
+                )
+            )
+        );
+            return searchResponse.Documents.FirstOrDefault();
         }
 
         public async Task<IEnumerable<T>> GetDocuments(string keyword)

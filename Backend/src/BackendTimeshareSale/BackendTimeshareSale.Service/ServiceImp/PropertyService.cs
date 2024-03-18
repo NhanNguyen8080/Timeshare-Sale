@@ -36,7 +36,7 @@ namespace BackendTimeshareSale.Service.ServiceImp
 
         public async Task<PropertyVM> GetById(int id)
         {
-            return _mapper.Map<PropertyVM>(await _elasticsearchService.GetDocument(id));
+            return _mapper.Map<PropertyVM>(_elasticsearchService.GetDocument(id));
         }
 
         public int GetAllOfProperties()
